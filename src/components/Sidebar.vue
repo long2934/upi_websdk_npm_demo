@@ -40,7 +40,7 @@
         <p class="center" v-if="!Object.keys(cart).length"><em>No items in cart</em></p>
         <div class="spread">
           <span><strong>Total:</strong>${{ calculateTotal() }}</span>
-          <button class="btn btn-light">Checkout</button>
+          <button @click="checkout()" class="btn btn-light">Checkout</button>
         </div>
       </div>
     </div>
@@ -57,6 +57,9 @@ export default {
 			})
 			return product.price.USD
 		},
+    checkout(){
+      this.$router.push('/checkout');
+    },
 		calculateTotal () {
 			const total = Object.entries(this.cart).reduce((acc, curr, index) => {
 				return acc + (curr[1] * this.getPrice(curr[0]))
